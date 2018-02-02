@@ -1,0 +1,15 @@
+# Uncomment the next line to define a global platform for your project
+platform :ios, '11.2'
+
+target 'MaximoWOTRACKSample' do
+  use_frameworks!
+  pod 'MaximoRESTSDK', '1.0.0'
+
+  target 'MaximoWOTRACKSampleTests' do
+    inherit! :search_paths
+  end
+
+  target 'MaximoWOTRACKSampleUITests' do
+    inherit! :search_paths
+  end
+end
