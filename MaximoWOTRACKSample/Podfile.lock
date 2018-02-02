@@ -1,0 +1,21 @@
+PODS:
+  - Curry (4.0.0)
+  - MaximoRESTSDK (1.0.0):
+    - Curry (~> 4.0.0)
+    - Nimble (= 7.0.3)
+    - Quick (= 1.2.0)
+  - Nimble (7.0.3)
+  - Quick (1.2.0)
+
+DEPENDENCIES:
+  - MaximoRESTSDK (= 1.0.0)
+
+SPEC CHECKSUMS:
+  Curry: 887c0b9de9a9947820a59557459c7895e76d7b90
+  MaximoRESTSDK: fe6c211d1d8c4e66c79832a9f79f2336abc3df13
+  Nimble: 7f5a9c447a33002645a071bddafbfb24ea70e0ac
+  Quick: 58d203b1c5e27fff7229c4c1ae445ad7069a7a08
+
+PODFILE CHECKSUM: 791f20190dee32d822848e5e1a3d3d44708e9ba7
+
+COCOAPODS: 1.4.0

@@ -1,0 +1,6 @@
+framework module MaximoRESTSDK {
+  umbrella header "MaximoRESTSDK-umbrella.h"
+
+  export *
+  module * { export * }
+}
