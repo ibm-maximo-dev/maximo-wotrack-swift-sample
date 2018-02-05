@@ -17,9 +17,6 @@
 		9AD179382024B9F200A9AD74 /* MaximoWOTRACKSampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD179372024B9F200A9AD74 /* MaximoWOTRACKSampleTests.swift */; };
 		9AD179432024B9F200A9AD74 /* MaximoWOTRACKSampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD179422024B9F200A9AD74 /* MaximoWOTRACKSampleUITests.swift */; };
 		9AD179502024C40B00A9AD74 /* MaximoRESTSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AD179512024C40C00A9AD74 /* MaximoRESTSDK.framework */; };
-		9AD179542024C55C00A9AD74 /* Curry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AD179572024C55C00A9AD74 /* Curry.framework */; };
-		9AD179552024C55C00A9AD74 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AD179582024C55C00A9AD74 /* Nimble.framework */; };
-		9AD179562024C55C00A9AD74 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AD179592024C55C00A9AD74 /* Quick.framework */; };
 		9AD1795C2024DA9B00A9AD74 /* MaximoAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD1795B2024DA9B00A9AD74 /* MaximoAPI.swift */; };
 		9AD179632025027500A9AD74 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD179622025027500A9AD74 /* MainViewController.swift */; };
 		9F4C3E1ADCF067213F9751FC /* Pods_MaximoWOTRACKSample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 590F6ACE6AFF328D938E8AAF /* Pods_MaximoWOTRACKSample.framework */; };
@@ -63,11 +60,7 @@
 		9AD179442024B9F200A9AD74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9AD179512024C40C00A9AD74 /* MaximoRESTSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MaximoRESTSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AD179522024C4A200A9AD74 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		9AD179572024C55C00A9AD74 /* Curry.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Curry.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9AD179582024C55C00A9AD74 /* Nimble.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Nimble.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9AD179592024C55C00A9AD74 /* Quick.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Quick.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AD1795B2024DA9B00A9AD74 /* MaximoAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaximoAPI.swift; sourceTree = "<group>"; };
-		9AD179602024E35400A9AD74 /* OCMock.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = OCMock.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AD179622025027500A9AD74 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		9E9E81F5633A7E705540232F /* Pods-MaximoWOTRACKSampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaximoWOTRACKSampleTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MaximoWOTRACKSampleTests/Pods-MaximoWOTRACKSampleTests.release.xcconfig"; sourceTree = "<group>"; };
 		CD491D7544D6A1EC03CA15F7 /* Pods-MaximoWOTRACKSample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaximoWOTRACKSample.release.xcconfig"; path = "Pods/Target Support Files/Pods-MaximoWOTRACKSample/Pods-MaximoWOTRACKSample.release.xcconfig"; sourceTree = "<group>"; };
@@ -80,9 +73,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9AD179542024C55C00A9AD74 /* Curry.framework in Frameworks */,
-				9AD179552024C55C00A9AD74 /* Nimble.framework in Frameworks */,
-				9AD179562024C55C00A9AD74 /* Quick.framework in Frameworks */,
 				9AD179502024C40B00A9AD74 /* MaximoRESTSDK.framework in Frameworks */,
 				9F4C3E1ADCF067213F9751FC /* Pods_MaximoWOTRACKSample.framework in Frameworks */,
 			);
@@ -110,10 +100,6 @@
 		440DB7CFC153B6236F509A70 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9AD179602024E35400A9AD74 /* OCMock.framework */,
-				9AD179572024C55C00A9AD74 /* Curry.framework */,
-				9AD179582024C55C00A9AD74 /* Nimble.framework */,
-				9AD179592024C55C00A9AD74 /* Quick.framework */,
 				9AD179522024C4A200A9AD74 /* XCTest.framework */,
 				9AD179512024C40C00A9AD74 /* MaximoRESTSDK.framework */,
 				590F6ACE6AFF328D938E8AAF /* Pods_MaximoWOTRACKSample.framework */,
@@ -373,17 +359,11 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-MaximoWOTRACKSample/Pods-MaximoWOTRACKSample-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Curry/Curry.framework",
 				"${BUILT_PRODUCTS_DIR}/MaximoRESTSDK/MaximoRESTSDK.framework",
-				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
-				"${BUILT_PRODUCTS_DIR}/Quick/Quick.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Curry.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MaximoRESTSDK.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Quick.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -669,17 +649,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = MaximoWOTRACKSample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-framework",
-					"\"Curry\"",
-					"-framework",
-					"\"MaximoRESTSDK\"",
-					"-framework",
-					"\"Nimble\"",
-					"-framework",
-					"\"Quick\"",
-				);
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.maximo.MaximoWOTRACKSample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -695,17 +665,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = MaximoWOTRACKSample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-framework",
-					"\"Curry\"",
-					"-framework",
-					"\"MaximoRESTSDK\"",
-					"-framework",
-					"\"Nimble\"",
-					"-framework",
-					"\"Quick\"",
-				);
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.maximo.MaximoWOTRACKSample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -721,7 +681,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = MaximoWOTRACKSampleTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.maximo.MaximoWOTRACKSampleTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -738,7 +698,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = MaximoWOTRACKSampleTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.maximo.MaximoWOTRACKSampleTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -754,7 +714,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = MaximoWOTRACKSampleUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.maximo.MaximoWOTRACKSampleUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -770,7 +730,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = MaximoWOTRACKSampleUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.maximo.MaximoWOTRACKSampleUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

@@ -19,6 +19,7 @@ public class MaximoAPI {
     var options: Options?
     var connector: MaximoConnector?
     var loggedUser: [String: Any] = [:]
+    var workOrderSet: ResourceSet?
 
     private init() {
     }
@@ -41,19 +42,43 @@ public class MaximoAPI {
     }
 
     public func listWorkOrders() throws -> [[String: Any]] {
-        let workOrderSet = connector!.resourceSet(osName: "mxwo")
-        _ = workOrderSet.pageSize(pageSize: 10)
-        _ = workOrderSet._where(whereClause: "spi:istask=0")
-        _ = workOrderSet.paging(type: true)
-        _ = try workOrderSet.fetch()
+        workOrderSet = connector!.resourceSet(osName: "mxwo")
+        _ = workOrderSet!.pageSize(pageSize: 10)
+        _ = workOrderSet!._where(whereClause: "spi:istask=0")
+        _ = workOrderSet!.paging(type: true)
+        _ = try workOrderSet!.fetch()
 
-        let count = try workOrderSet.count()
+        let count = try workOrderSet!.count()
         var workOrders : [[String: Any]] = []
         for index in 0...count-1 {
-            let resource = try workOrderSet.member(index: index)
+            let resource = try workOrderSet!.member(index: index)
             workOrders.append(try resource!.toJSON())
         }
 
+        return workOrders
+    }
+
+    public func nextWorkOrdersPage() throws -> [[String: Any]] {
+        _ = try workOrderSet?.nextPage()
+        let count = try workOrderSet!.count()
+        var workOrders : [[String: Any]] = []
+        for index in 0...count-1 {
+            let resource = try workOrderSet!.member(index: index)
+            workOrders.append(try resource!.toJSON())
+        }
+        
+        return workOrders
+    }
+
+    public func previousWorkOrdersPage() throws -> [[String: Any]] {
+        _ = try workOrderSet?.previousPage()
+        let count = try workOrderSet!.count()
+        var workOrders : [[String: Any]] = []
+        for index in 0...count-1 {
+            let resource = try workOrderSet!.member(index: index)
+            workOrders.append(try resource!.toJSON())
+        }
+        
         return workOrders
     }
 }

@@ -17,6 +17,13 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        _username.autocapitalizationType = UITextAutocapitalizationType.none
+        _username.autocorrectionType = UITextAutocorrectionType.no
+        
+        let hostPort = UserDefaults.standard.string(forKey: "hostPort")
+        if hostPort != nil {
+            _hostPort.text = hostPort
+        }
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -28,6 +35,7 @@ class ViewController: UIViewController {
     @IBAction func LoginButton(_ sender: Any) {
         do {
             let hostPortStr = _hostPort.text
+            UserDefaults.standard.set(hostPortStr, forKey: "hostPort")
             var hostPort = hostPortStr!.split(separator: ":")
             _ = try MaximoAPI.shared().login(userName: _username.text!, password: _password.text!,
                     host: String(hostPort[0]), port: Int(hostPort[1])!)

@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '767AB30EF3B755FE4AF6FD882D845811'
+               BlueprintIdentifier = '021D3753A196D42312788AD22A9511D0'
                BlueprintName = 'MaximoRESTSDK'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'MaximoRESTSDK.framework'>
