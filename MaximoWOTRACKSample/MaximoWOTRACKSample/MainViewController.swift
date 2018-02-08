@@ -28,12 +28,23 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         _listActivityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
         _listActivityIndicator.isHidden = true
-        view.addSubview(_listActivityIndicator)
         
         _tableView.isHidden = true
         _tableView.numberOfRows(inSection: PAGE_SIZE)
+
+        let add = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTapped))
+        navigationItem.setRightBarButton(add, animated: true)
     }
 
+    @objc func addButtonTapped(sender: UIBarButtonItem)
+    {
+        performSegue(withIdentifier: "showWorkOrderForm", sender: self)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationItem.title = "Work Orders"
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         loadWorkOrders()
         _tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
@@ -55,6 +66,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     func loadSegment(offset:Int, size:Int) {
         if (!self.isLoading) {
             self.isLoading = true
+            _tableView.tableFooterView?.isHidden = false
             _listActivityIndicator.isHidden = false
             _listActivityIndicator.startAnimating()
 
@@ -79,8 +91,19 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                     self.isLoading = false
                     self._listActivityIndicator.stopAnimating()
                     self._listActivityIndicator.isHidden = true
+                    self._tableView.tableFooterView?.isHidden = true
                 })
             }
+        }
+    }
+
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let lastSectionIndex = tableView.numberOfSections - 1
+        let lastRowIndex = tableView.numberOfRows(inSection: lastSectionIndex) - 1
+        if indexPath.section ==  lastSectionIndex && indexPath.row == lastRowIndex {
+            _listActivityIndicator.frame = CGRect(x: CGFloat(0), y: CGFloat(0), width: tableView.bounds.width, height: CGFloat(44))
+            self._tableView.tableFooterView = _listActivityIndicator
+            self._tableView.tableFooterView?.isHidden = true
         }
     }
 
@@ -106,6 +129,21 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         return cell
     }
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedWorkOrder = self.workOrders![indexPath.row]
+        _tableView.deselectRow(at: indexPath as IndexPath, animated: true)
+        performSegue(withIdentifier: "showWorkOrderForm", sender: selectedWorkOrder)
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showWorkOrderForm" {
+            if let selectedWorkOrder = sender as? [String: Any] {
+                let controller = segue.destination as! FormViewController
+                controller.selectedWorkOrder = selectedWorkOrder
+            }
+        }
+    }
+    
     func loadWorkOrders() {
         do {
             workOrders = try MaximoAPI.shared().listWorkOrders()

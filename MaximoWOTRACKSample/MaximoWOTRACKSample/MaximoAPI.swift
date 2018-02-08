@@ -81,4 +81,14 @@ public class MaximoAPI {
         
         return workOrders
     }
+
+    public func updatetWorkOrder(workOrder: [String: Any]) throws {
+        let uri = connector!.getCurrentURI() + "/os/mxwo/" + String(workOrder["workorderid"] as! Int)
+        _ = try connector!.update(uri: uri, jo: workOrder, properties: nil)
+    }
+
+    public func createWorkOrder(workOrder: [String: Any]) throws {
+        let uri = connector!.getCurrentURI() + "/os/mxwo"
+        _ = try connector!.create(uri: uri, jo: workOrder, properties: nil)
+    }
 }
