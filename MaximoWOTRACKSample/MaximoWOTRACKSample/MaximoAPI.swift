@@ -20,6 +20,8 @@ public class MaximoAPI {
     var connector: MaximoConnector?
     var loggedUser: [String: Any] = [:]
     var workOrderSet: ResourceSet?
+    var siteID : String = ""
+    var orgID : String = ""
 
     private init() {
     }
@@ -38,13 +40,16 @@ public class MaximoAPI {
         _ = try personSet._where(whereClause: "spi:personid=\"" + userName.uppercased() + "\"").fetch()
         let person = try personSet.member(index: 0)
         loggedUser = try person!.toJSON()
+        siteID = loggedUser["locationsite"] as! String
+        orgID = loggedUser["locationorg"] as! String
         return loggedUser
     }
 
     public func listWorkOrders() throws -> [[String: Any]] {
         workOrderSet = connector!.resourceSet(osName: "mxwo")
         _ = workOrderSet!.pageSize(pageSize: 10)
-        _ = workOrderSet!._where(whereClause: "spi:istask=0")
+        _ = workOrderSet!._where(whereClause:
+            "spi:istask=0 and spi:siteid=\"" + siteID + "\" and spi:orgid=\"" + orgID + "\"")
         _ = workOrderSet!.paging(type: true)
         _ = try workOrderSet!.fetch()
 

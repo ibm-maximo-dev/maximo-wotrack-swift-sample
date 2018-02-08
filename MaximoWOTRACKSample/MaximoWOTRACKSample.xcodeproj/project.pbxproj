@@ -10,6 +10,8 @@
 		148FC9C3CA746DE1BA55C86C /* Pods_MaximoWOTRACKSampleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DFD702275CCB6486D6A0CDB /* Pods_MaximoWOTRACKSampleTests.framework */; };
 		32367E28DAA71147F5612E30 /* Pods_MaximoWOTRACKSampleUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0B60F1880ED1524577E3BD7 /* Pods_MaximoWOTRACKSampleUITests.framework */; };
 		9A9D324E202B572D005A7F64 /* FormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9D324D202B572D005A7F64 /* FormViewController.swift */; };
+		9AC280D9202CFE0B00140792 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC280D8202CFE0B00140792 /* TableViewCell.swift */; };
+		9AC280DB202D0C7300140792 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC280DA202D0C7300140792 /* RoundedButton.swift */; };
 		9AD179232024B9F100A9AD74 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD179222024B9F100A9AD74 /* AppDelegate.swift */; };
 		9AD179252024B9F100A9AD74 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD179242024B9F100A9AD74 /* ViewController.swift */; };
 		9AD179282024B9F100A9AD74 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AD179262024B9F100A9AD74 /* Main.storyboard */; };
@@ -47,6 +49,8 @@
 		71F1E794C328A395CFDC1256 /* Pods-MaximoWOTRACKSampleUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaximoWOTRACKSampleUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MaximoWOTRACKSampleUITests/Pods-MaximoWOTRACKSampleUITests.release.xcconfig"; sourceTree = "<group>"; };
 		9104349C86A81A21E1F72B9F /* Pods-MaximoWOTRACKSampleUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaximoWOTRACKSampleUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MaximoWOTRACKSampleUITests/Pods-MaximoWOTRACKSampleUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		9A9D324D202B572D005A7F64 /* FormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewController.swift; sourceTree = "<group>"; };
+		9AC280D8202CFE0B00140792 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		9AC280DA202D0C7300140792 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		9AD1791F2024B9F100A9AD74 /* MaximoWOTRACKSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MaximoWOTRACKSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AD179222024B9F100A9AD74 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9AD179242024B9F100A9AD74 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -158,6 +162,8 @@
 				9AD1795B2024DA9B00A9AD74 /* MaximoAPI.swift */,
 				9AD179622025027500A9AD74 /* MainViewController.swift */,
 				9A9D324D202B572D005A7F64 /* FormViewController.swift */,
+				9AC280D8202CFE0B00140792 /* TableViewCell.swift */,
+				9AC280DA202D0C7300140792 /* RoundedButton.swift */,
 			);
 			path = MaximoWOTRACKSample;
 			sourceTree = "<group>";
@@ -482,6 +488,8 @@
 				9AD179252024B9F100A9AD74 /* ViewController.swift in Sources */,
 				9AD1795C2024DA9B00A9AD74 /* MaximoAPI.swift in Sources */,
 				9AD179232024B9F100A9AD74 /* AppDelegate.swift in Sources */,
+				9AC280D9202CFE0B00140792 /* TableViewCell.swift in Sources */,
+				9AC280DB202D0C7300140792 /* RoundedButton.swift in Sources */,
 				9A9D324E202B572D005A7F64 /* FormViewController.swift in Sources */,
 				9AD179632025027500A9AD74 /* MainViewController.swift in Sources */,
 			);

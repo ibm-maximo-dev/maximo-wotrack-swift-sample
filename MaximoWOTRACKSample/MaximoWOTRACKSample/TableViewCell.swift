@@ -6,4 +6,15 @@
 //  Copyright © 2018 IBM. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class TableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var _workOrder: UILabel!
+    @IBOutlet weak var _description: UILabel!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+    }
+}

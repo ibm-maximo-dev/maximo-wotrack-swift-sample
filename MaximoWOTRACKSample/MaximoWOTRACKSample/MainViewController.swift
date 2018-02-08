@@ -115,7 +115,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (workOrders != nil) {
             return workOrders!.count
@@ -124,20 +124,17 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell : UITableViewCell = self._tableView.dequeueReusableCell(withIdentifier: "cell")!
-        cell.textLabel?.text = (self.workOrders![indexPath.row]["description"] as! String)
+        let cell = self._tableView.dequeueReusableCell(withIdentifier: "workOrderCell", for: indexPath) as! TableViewCell
+        cell._workOrder.text = (self.workOrders![indexPath.row]["wonum"] as! String)
+        cell._description.text = (self.workOrders![indexPath.row]["description"] as! String)
         return cell
-    }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedWorkOrder = self.workOrders![indexPath.row]
-        _tableView.deselectRow(at: indexPath as IndexPath, animated: true)
-        performSegue(withIdentifier: "showWorkOrderForm", sender: selectedWorkOrder)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showWorkOrderForm" {
-            if let selectedWorkOrder = sender as? [String: Any] {
+            if let indexPath = _tableView.indexPathForSelectedRow {
+                let selectedWorkOrder = self.workOrders![indexPath.row]
+                _tableView.deselectRow(at: indexPath as IndexPath, animated: true)
                 let controller = segue.destination as! FormViewController
                 controller.selectedWorkOrder = selectedWorkOrder
             }
