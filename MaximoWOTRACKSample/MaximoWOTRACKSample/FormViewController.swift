@@ -8,6 +8,12 @@
 
 import UIKit
 
+extension UITextField {
+    func loadDropdownData(data: [String], selectedItem: String) {
+        self.inputView = StatusPickerView(pickerData: data, selectedItem: selectedItem, dropdownField: self)
+    }
+}
+
 class FormViewController: UIViewController {
     
     @IBOutlet weak var _workOrder: UITextField!
@@ -16,12 +22,14 @@ class FormViewController: UIViewController {
     @IBOutlet weak var _scheduleStart: UITextField!
     @IBOutlet weak var _scheduleFinish: UITextField!
     @IBOutlet weak var _saveButton: UIButton!
-
+    @IBOutlet weak var _status: UITextField!
+    
     var selectedWorkOrder : [String: Any]?
     var selectedDateField : String?
     var scheduleStart : Date?
     var scheduleFinish : Date?
     var isNew : Bool = true
+    var statusList : [[String: Any]] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,12 +38,29 @@ class FormViewController: UIViewController {
         _scheduleStart.addTarget(self, action: #selector(showDateTimePicker), for: UIControlEvents.touchDown)
         _scheduleFinish.addTarget(self, action: #selector(showDateTimePicker), for: UIControlEvents.touchDown)
         _saveButton.addTarget(self, action: #selector(saveWorkOrder), for: UIControlEvents.touchUpInside)
+        
+        do {
+            statusList = try MaximoAPI.shared().listWorkOrderStatuses()
+        }
+        catch {
+            //TODO: Show error message.
+        }
 
+        var stringList : [String] = []
+        var i = 0
+        while (i < statusList.count) {
+            var domainValue = statusList[i]
+            stringList.append(domainValue["description"] as! String)
+            i += 1
+        }
+
+        var statusDescription = "Waiting on Approval"
         if selectedWorkOrder != nil {
             isNew = false
             _workOrder.text = selectedWorkOrder!["wonum"] as? String
             _description.text = selectedWorkOrder!["description"] as? String
             _duration.text = String(selectedWorkOrder!["estdur"] as! Double)
+            statusDescription = self.selectedWorkOrder!["status_description"] as! String
             
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
@@ -52,6 +77,12 @@ class FormViewController: UIViewController {
                 dateFormatter.dateFormat = "MM/dd/yyyy HH:mm"
                 _scheduleFinish.text = dateFormatter.string(from: scheduleFinish!)
             }
+        }
+
+        _status.loadDropdownData(data: stringList, selectedItem: statusDescription)
+
+        if isNew {
+            _status.isUserInteractionEnabled = false
         }
     }
 
@@ -83,6 +114,11 @@ class FormViewController: UIViewController {
         if scheduleFinish != nil {
             selectedWorkOrder!["schedfinish"] = dateFormatter.string(from: scheduleFinish!)
         }
+
+        let statusPicker = _status.inputView as! StatusPickerView
+        let selectedStatus = statusList[statusPicker.selectedRow]
+        selectedWorkOrder!["status"] = selectedStatus["maxvalue"]
+        selectedWorkOrder!["status_description"] = selectedStatus["description"]
 
         return selectedWorkOrder!
     }

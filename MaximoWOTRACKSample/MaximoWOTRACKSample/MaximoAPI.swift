@@ -96,4 +96,23 @@ public class MaximoAPI {
         let uri = connector!.getCurrentURI() + "/os/mxwo"
         _ = try connector!.create(uri: uri, jo: workOrder, properties: nil)
     }
+
+    public func listWorkOrderStatuses() throws -> [[String: Any]] {
+        let statusSet = connector?.resourceSet(osName: "mxdomain")
+        var resultList : [[String: Any]] = []
+        _ = statusSet!._where(whereClause: "spi:domainid=\"WOSTATUS\"")
+        _ = try statusSet!.fetch()
+        let woStatusDomain = try statusSet!.member(index: 0)
+        var woStatusJSON = try woStatusDomain!.toJSON()
+        var values : [Any] = woStatusJSON["synonymdomain"] as! [Any]
+        var i = 0
+        while (i < values.count) {
+            let domainValue : [String: Any] = values[i] as! [String : Any]
+            if (domainValue["defaults"] as! Int) == 1 {
+                resultList.append(domainValue)
+            }
+            i += 1
+        }
+        return resultList
+    }
 }
