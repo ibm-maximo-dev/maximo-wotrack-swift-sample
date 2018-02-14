@@ -178,7 +178,7 @@ Before we discuss the actual methods available for updating and creating new dat
 REST APIs usually rely on JSON format to transport data between the client and the server.
 Hence, in order to modify or create records, you need to provide a JSON representation of the record you wish to modify or create as an input for the API method.
 
-Building and modifying JSON structures can be easily accomplished by the use of specific APIs, almost every modern programming language provides a set of APIs to build and manipulate JSON. In this tutorial, we exhibit a very simple example of how to build JSON objects in the Android/Kotlin programming language.
+Building and modifying JSON structures can be easily accomplished by the use of specific APIs, almost every modern programming language provides a set of APIs to build and manipulate JSON. In this tutorial, we exhibit a very simple example of how to build JSON objects in the iOS Swift programming language.
 
  ```swift
 // This creates a JsonObjectBuilder component.
