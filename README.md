@@ -49,10 +49,10 @@ After this method is called, it maintains a reference to a Maximo user profile t
 The following example illustrates how to use this API to authenticate a user:
 
 ```swift
-var options = Options().user(userName).password(password).auth("maxauth")
-options = options.host(host).port(port).lean(true)
-var connector = MaximoConnector(options).debug(true)
-connector.connect()
+var options = Options().user(user: userName).password(password: password).auth(authMode: "maxauth")
+options = options.host(host: host).port(port: port).lean(lean: true)
+var connector = MaximoConnector(options: options)
+try connector.connect()
 ```
 
 It is strongly advised that you keep only a single instance of the MaximoConnector object on your application, given that it is a stateful object that keeps a reference to the logged Maximo user profile. It is not only a good practice, but it can save you time and resources from having to re-authenticate every time you invoke another method from the APIs.
@@ -65,20 +65,20 @@ To use this method, you need to build an Options object by supplying the followi
 Connection or authentication failures can be handled by catching the following exception types: IOException and OslcException.
 
 ```swift
-try {
+do {
     ...
-    connector.connect()
-} catch (e: IOException) {
+    try connector.connect()
+} catch OslcError.invalidConnectorInstance {
     // Handle connection failures here...
-} catch (e: OslcException) {
-    // Handle authentication failures here...
+} catch {
+    // Handle general failures here...
 }
 ```
 
 To end a user session, just use the same instance of the MaximoConnector object used for the Application Login.
 
 ```swift
-connector.disconnect() // Log out of Maximo
+try connector.disconnect() // Log out of Maximo
 ```
 
 ## List Work Orders that are Waiting for Approval
@@ -90,20 +90,20 @@ The following code sample shows how to select a set of work order records by usi
 ```swift
 var PAGE_SIZE = 5
 // "mxwo" is the Object Structure defined to represent a Work Order object.
-val workOrderSet = connector.resourceSet("mxwo") // This returns a ResourceSet object instance
-val resultList = mutableListOf<JsonObject>() // Creates an empty list to hold JsonObject instances.
-workOrderSet.paging(true) // Enable pagination.
-workOrderSet.pageSize(PAGE_SIZE) // Set the page size.
+val workOrderSet = connector.resourceSet(osName: "mxwo") // This returns a ResourceSet object instance
+val resultList : [String: Any] = [:] // Creates an empty array to hold JSON objects.
+workOrderSet.paging(type: true) // Enable pagination.
+workOrderSet.pageSize(pageSize: PAGE_SIZE) // Set the page size.
 // Use the following query to skip tasks and only fetch Work Orders that are "Waiting for Approval"
-workOrderSet.where("spi:istask=0 and spi:status=\"WAPPR\"")
-workOrderSet.orderBy("spi:wonum") // Ordering by Work Order Number
-workOrderSet.fetch()
+workOrderSet._where(whereClause: "spi:istask=0 and spi:status=\"WAPPR\"")
+workOrderSet.orderBy(orderByProperties: ["spi:wonum"]) // Ordering by Work Order Number
+try workOrderSet.fetch()
 var i = 0
-while (i.toInt() < PAGE_SIZE) {
-    val resource = workOrderSet.member(i) // Return a Resource instance
-    i = i.inc()
-    val jsonObject = resource.toJSON() // Convert a Resource to a JsonObject representation
-    resultList.add(jsonObject) // Add retrieved JsonObject instance to the list
+while (i < PAGE_SIZE) {
+    var resource = workOrderSet.member(index: i) // Return a Resource instance
+    i += 1
+    var jsonObject = resource.toJSON() // Convert a Resource to a JSON representation
+    resultList.append(jsonObject) // Add retrieved JSON object to the array
 }
 ```
 ### ResourceSet Component
@@ -114,7 +114,7 @@ By using an instance of the MaximoConnector class, you can fetch a ResourceSet o
 
 The following example shows how to obtain an instance of the ResourceSet class for the MXWO object structure that holds the work order records information.
  ```swift
-    val workOrderSet = connector.resourceSet("mxwo") // This returns a ResourceSet object instance
+    var workOrderSet = connector.resourceSet(osName: "mxwo") // This returns a ResourceSet object instance
  ```
 After you hold an instance of the ResourseSet class, you can perform actions like searching for existing records, ordering records by a specific set of columns, fetching a records page, and more.
 
@@ -133,37 +133,37 @@ The following list shows the most commonly used actions and input parameters tha
      var totalCount = workOrderSet.totalCount()
      workOrderSet.nextPage()
      workOrderSet.previousPage()
-     var resourceObject = workOrderSet.member(0)
+     var resourceObject = workOrderSet.member(index: 0)
  ```
  - oslc.select: A String var-args parameter that allows the user to fetch a set of properties for the selected objects instead of loading all their properties. This parameter is useful for applications that are developed for environments that have small memory footprints.
  ```swift
-     workOrderSet.select("spi:wonum", "spi:description", "spi:status")
+     workOrderSet.select(selectClause: ["spi:wonum", "spi:description", "spi:status"])
  ```
  - oslc.where: A String parameter that allows the user to define a SQL-based where clause to filter the record set.
   ```swift
-     workOrderSet.where("spi:istask=0 and spi:status='WAPPR'")
+     workOrderSet._where(whereClause: "spi:istask=0 and spi:status=\"WAPPR\"")
  ```
  - oslc.paging: A flag that enables or disables paging for the selected record set.
   ```swift
-     workOrderSet.paging(true)
+     workOrderSet.paging(type: true)
  ```
  - oslc.pageSize: An integer parameter that defines the page size for the selected record set.
   ```swift
-     workOrderSet.pageSize(5)
+     workOrderSet.pageSize(pageSize: 5)
  ```
  - oslc.orderBy: A String var-args parameter that allows the user to define a set the properties that are used to sort the obtained record set.
   ```swift
-     workOrderSet.orderBy("spi:wonum")
+     workOrderSet.orderBy(orderByProperties: ["spi:wonum"])
  ```
  - oslc.searchTerms: A String var-args parameter that performs record-wide text searchs for the tokens that are specified.
   ```swift
-     workOrderSet.searchTerms("pump", "broken")
+     workOrderSet.hasTerms(terms: ["pump", "broken"])
  ```
 
 After these elements are successfully loaded into the ResourceSet, they must be convered into a friendly data format that is usable inside the application context. That's when JSON (JavaScript Object Notation) objects are used.
  ```swift
-     val resourceObject = workOrderSet.member(0) // I am a Resource object
-     val jsonObject = resourceObject.toJSON() // I am a JSON object, 
+     var resourceObject = workOrderSet.member(index: 0) // I am a Resource object
+     valr jsonObject = resourceObject.toJSON() // I am a JSON object, 
                                               // much more friendly and human-readable.
  ```
 The Resource class is simply a data object representation of an object structure. It provides several utility methods to update, merge, add or even delete an Object Structure. It also provides methods to allow conversions to other data types like: JSON or byte arrays. In the previous example, after a previously loaded Resource object is fetched, it is converted to its JSON object representation.
@@ -178,22 +178,20 @@ Before we discuss the actual methods available for updating and creating new dat
 REST APIs usually rely on JSON format to transport data between the client and the server.
 Hence, in order to modify or create records, you need to provide a JSON representation of the record you wish to modify or create as an input for the API method.
 
-Building and modifying JSON structures can be easily accomplished by the use of specific APIs, almost every modern programming language provides a set of APIs to build and manipulate JSON. In this tutorial, we exhibit a very simple example of how to build JSON objects in the iOS Swift programming language.
+Building and modifying JSON structures can be easily accomplished by the use of specific APIs, almost every modern programming language provides a set of APIs to build and manipulate JSON. In this tutorial, we exhibit a very simple example of how to build JSON objects in the iOS Swift programming language. In Swift, JSON objects are represented as Dictionary instances. Swift uses implicit type casting that allows you to convert a Dictionary object to a JSON data/string and a JSON data/string back into a Dictionary object, using JSON serializers available on the programming language API.
 
  ```swift
-// This creates a JsonObjectBuilder component.
-var objectBuilder = Json.createObjectBuilder()
-// Adding 'WONUM' attribute to the JSON structure.
-objectBuilder.add("wonum", wonum.text.toString())
+// Adding 'WONUM' attribute to the JSON object.
+jsonObject["wonum"] = wonum.text
 // Adding 'SITEID' attribute.
-objectBuilder.add("siteid", MaximoAPI.INSTANCE.loggedUser.getString("locationsite"))
+jsonObject["siteid"] = MaximoAPI.shared().loggedUser["locationsite"]
 // Adding 'ORGID' attribute.
-objectBuilder.add("orgid", MaximoAPI.INSTANCE.loggedUser.getString("locationorg"))
-// This returns a JsonObject instance.
-objectBuilder.build()
+jsonObject["orgid"] = MaximoAPI.shared().loggedUser["locationorg"]
+// Converting a JSON structure into a Data object, so it can be sent over the network in a POST request.
+let postData : Data = try JSONSerialization.data(withJSONObject: jsonObject, options: [])
+// Converting back a Data object into a JSON object.
+jsonObject = try JSONSerialization.jsonObject(with: postData, options: []) as! [String : Any]
  ```
-
-The objectBuilder component works similar to a Map data structure. It holds a key-value pair for every attribute that is added to the Object Builder. After you have finished setting up the attributes, you just need to invoke the build() method and it returns a JsonObject instance that is required for updating/creating records through the Maximo REST APIs.
 
 ### Creating a Work Order
 The process for creating a new Work Order is very simple. The most complex piece is building a JSON object that represents a new Work Order record. This can sometimes be a little time consuming, given the large number of attributes available in the MXWO Object Structure. Also, it is very important that you observe the following set of rules:
@@ -214,7 +212,7 @@ var workOrder = buildWorkOrderJSON()
 // the Application Login to build the URI string.
 var uri = connector.currentURI + "/os/mxwo"
 // Invoking the create() method available in the MaximoConnector component.
-connector.create(uri, workOrder)
+connector.create(uri: uri, jo: workOrder)
  ```
 
 ### Updating a Work Order
@@ -227,7 +225,7 @@ In the update process, the URI is composed by a concatenation of the Object Stru
 This is an example of a URI for a Work Order object with ID 1022.
  ```swift
 // URI = http://<IP>:<PORT>/maximo/oslc/os/mxwo/1022
-var uri = connector.currentURI + "/os/mxwo/" + workOrder.getJsonNumber("workorderid")
+var uri = connector.currentURI + "/os/mxwo/" + String(workOrder["workorderid"] as! Int)
  ```
 
 The second argument is an updated copy of the original JsonObject.
@@ -235,10 +233,10 @@ Here is another simplified example on how to update an existing Work Order:
 
  ```swift
 // Obtaining an updated instance of the Work Order.
-var updatedWorkOrder = updateWorkOrder(originalWorkOrder)
+var updatedWorkOrder = updateWorkOrder(workOrder: originalWorkOrder)
 // Using the MaximoConnector object previously obtained during 
 // the Application Login to build the URI string.
-var uri = connector.currentURI + "/os/mxwo/" + updatedWorkOrder.getJsonNumber("workorderid")
+var uri = connector.currentURI + "/os/mxwo/" + String(updatedWorkOrder["workorderid"] as! Int)
 // Invoking the update() method available in the MaximoConnector component.
-connector.update(uri, updatedWorkOrder)
+connector.update(uri: uri, jo: updatedWorkOrder)
  ```
