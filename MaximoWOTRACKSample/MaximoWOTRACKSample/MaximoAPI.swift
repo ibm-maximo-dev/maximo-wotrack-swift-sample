@@ -40,8 +40,14 @@ public class MaximoAPI {
         _ = try personSet._where(whereClause: "spi:personid=\"" + userName.uppercased() + "\"").fetch()
         let person = try personSet.member(index: 0)
         loggedUser = try person!.toJSON()
-        siteID = loggedUser["locationsite"] as! String
-        orgID = loggedUser["locationorg"] as! String
+        
+        if let lID = loggedUser["locationsite"] {
+            siteID = lID as! String;
+        }
+        
+        if let lID = loggedUser["locationsite"] {
+            orgID = lID as! String
+        }
         return loggedUser
     }
 

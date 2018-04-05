@@ -37,8 +37,14 @@ class ViewController: UIViewController {
             let hostPortStr = _hostPort.text
             UserDefaults.standard.set(hostPortStr, forKey: "hostPort")
             var hostPort = hostPortStr!.split(separator: ":")
+            var port: Int
+            if(hostPort.count > 1) {
+                port = Int(hostPort[1])!
+            } else {
+                port = 80 // default if none specified
+            }
             _ = try MaximoAPI.shared().login(userName: _username.text!, password: _password.text!,
-                    host: String(hostPort[0]), port: Int(hostPort[1])!)
+                    host: String(hostPort[0]), port: port)
         }
         catch {
             let alert = UIAlertController(title: "Error", message: "An error occurred during the login", preferredStyle: UIAlertControllerStyle.alert)
