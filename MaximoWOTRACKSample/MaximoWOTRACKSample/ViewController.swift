@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MaximoRESTSDK
 
 class ViewController: UIViewController {
 
@@ -46,11 +47,27 @@ class ViewController: UIViewController {
             _ = try MaximoAPI.shared().login(userName: _username.text!, password: _password.text!,
                     host: String(hostPort[0]), port: port)
         }
+        catch OslcError.invalidRequest {
+            let alert = UIAlertController(title: "Error", message: "Invalid Request supplied. Check hostname, port, username and password", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+        catch OslcError.loginFailure(let error) {
+            let alert = UIAlertController(title: "Error", message: error, preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+        catch OslcError.serverError(let code, let error) {
+            let alert = UIAlertController(title: "Error", message: "Code: \(code) and Error \(error)", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
         catch {
             let alert = UIAlertController(title: "Error", message: "An error occurred during the login", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }
+        
     }
 }
 
