@@ -30,6 +30,7 @@ class FormViewController: UIViewController {
     var scheduleFinish : Date?
     var isNew : Bool = true
     var statusList : [[String: Any]] = []
+    let dateFormatter = DateFormatter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,7 +63,7 @@ class FormViewController: UIViewController {
             _duration.text = String(selectedWorkOrder!["estdur"] as! Double)
             statusDescription = self.selectedWorkOrder!["status_description"] as! String
             
-            let dateFormatter = DateFormatter()
+//            let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
             
             if (selectedWorkOrder!["schedstart"] != nil) {
@@ -106,7 +107,7 @@ class FormViewController: UIViewController {
         selectedWorkOrder!["description"] = _description.text
         selectedWorkOrder!["estdur"] = Double(_duration.text!)
         
-        let dateFormatter = DateFormatter()
+//        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssxxxxx"
         if scheduleStart != nil {
             selectedWorkOrder!["schedstart"] = dateFormatter.string(from: scheduleStart!)
@@ -123,6 +124,16 @@ class FormViewController: UIViewController {
         return selectedWorkOrder!
     }
     
+    func figureOutDuration() -> Void {
+        dateFormatter.dateFormat = "MM/dd/yyyy HH:mm"
+        if let start = scheduleStart, let end = scheduleFinish {
+            let duration = end.timeIntervalSince(start) / 60 // duration in minutes
+            _duration.text = duration.description
+        }
+        else {
+            _duration.text = ""
+        }
+    }
     @objc func showDateTimePicker(sender: UITextField) {
         selectedDateField = sender.placeholder
         let datePickerView = UIDatePicker()
@@ -138,16 +149,22 @@ class FormViewController: UIViewController {
     }
 
     @objc func handleDatePicker(sender: UIDatePicker) {
-        let dateFormatter = DateFormatter()
+//        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/yyyy HH:mm"
         if selectedDateField! == "Schedule Start" {
             scheduleStart = sender.date
             _scheduleStart.text = dateFormatter.string(from: sender.date)
+            _scheduleStart.resignFirstResponder()
         }
         else {
             scheduleFinish = sender.date
             _scheduleFinish.text = dateFormatter.string(from: sender.date)
+            _scheduleFinish.resignFirstResponder()
+
         }
+        // Set duration field
+        figureOutDuration()
+
     }
 
     @objc func saveWorkOrder() {
