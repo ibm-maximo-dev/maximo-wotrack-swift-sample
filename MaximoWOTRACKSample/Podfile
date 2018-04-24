@@ -3,8 +3,8 @@ platform :ios, '11.2'
 
 target 'MaximoWOTRACKSample' do
   use_frameworks!
-#  pod 'MaximoRESTSDK', '1.0.1'
-  pod 'MaximoRESTSDK', :git => 'https://github.ibm.com/maximo-ohio/maximo-swift-restclient.git'
+  pod 'MaximoRESTSDK', '1.0.2'
+#  pod 'MaximoRESTSDK', :git => 'https://github.ibm.com/maximo-ohio/maximo-swift-restclient.git'
 #  pod 'MaximoRESTSDK', :path => '../../maximo-swift-restclient'
 
   target 'MaximoWOTRACKSampleTests' do
