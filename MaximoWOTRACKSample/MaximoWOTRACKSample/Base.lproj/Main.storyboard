@@ -124,8 +124,8 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="sample-img.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="QNr-P2-YON">
-                                <rect key="frame" x="67" y="81" width="240" height="111"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="sample-img" translatesAutoresizingMaskIntoConstraints="NO" id="ojL-QL-wpA">
+                                <rect key="frame" x="67" y="79" width="240" height="96"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
@@ -225,7 +225,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="XBT-w9-7cy">
-                                <rect key="frame" x="27" y="175" width="320" height="392"/>
+                                <rect key="frame" x="27" y="175" width="320" height="438"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="6z3-b4-VPC">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="346"/>
@@ -384,7 +384,20 @@
                                             </button>
                                         </subviews>
                                     </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LDr-TI-30d" customClass="RoundedButton" customModule="MaximoWOTRACKSample" customModuleProvider="target">
+                                        <rect key="frame" x="137.5" y="408" width="45" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="YOG-Qs-zdI"/>
+                                        </constraints>
+                                        <state key="normal" title="Delete"/>
+                                        <connections>
+                                            <action selector="deleteButtonTouched:" destination="WorkOrderForm" eventType="touchUpInside" id="M6N-5I-jHH"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="bvm-Tu-llq" firstAttribute="centerX" secondItem="XBT-w9-7cy" secondAttribute="centerX" id="RxA-5E-dx6"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -402,6 +415,7 @@
                         <outlet property="_scheduleStart" destination="3uj-Yt-tFG" id="LJi-io-hAO"/>
                         <outlet property="_status" destination="FMY-x0-Tp1" id="LN9-yw-oZ0"/>
                         <outlet property="_workOrder" destination="Xk5-Tj-ePv" id="9fe-f9-pE3"/>
+                        <outlet property="deleteButton" destination="LDr-TI-30d" id="zJg-r1-6fb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eoh-L8-uSx" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -410,6 +424,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="sample-img.jpg" width="444" height="113"/>
+        <image name="sample-img" width="444" height="113"/>
     </resources>
 </document>
