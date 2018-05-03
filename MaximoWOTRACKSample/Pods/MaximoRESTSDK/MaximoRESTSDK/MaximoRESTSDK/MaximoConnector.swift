@@ -203,75 +203,94 @@ public class MaximoConnector {
      * @throws
      */
     public func connect(proxyConfiguration : [String: String]?) throws {
+/*
         if isValid() {
             throw OslcError.connectionAlreadyEstablished
         }
-        cookies.removeAll()
-    
-        let uri: String = self.options.getAppURI()
-        var request : URLRequest? = self.setAuth(uri: uri)
-        if request != nil {
-            if !self.options.isFormAuth() {
-                self.setMethod(request: &request!, method: "GET", properties: nil)
-            }
-
-            let configuration = URLSessionConfiguration()
-            var session : URLSession
-            if proxyConfiguration != nil {
-                configuration.connectionProxyDictionary = proxyConfiguration
-                session = URLSession(configuration: configuration)
-            } else {
-                session = URLSession.shared
-            }
-
-            let semaphore = DispatchSemaphore(value: 0)
-            let connectionHandler: (Data?, URLResponse?, Error?) -> Void = {
-                (data, response, error) in
-                if let httpResponse = response as? HTTPURLResponse, let fields = httpResponse.allHeaderFields as? [String : String] {
-                    let cookies = HTTPCookie.cookies(withResponseHeaderFields: fields, for: response!.url!)
-                    HTTPCookieStorage.shared.setCookies(cookies, for: response!.url!, mainDocumentURL: nil)
-                    for cookie in cookies {
-                        var cookieProperties = [HTTPCookiePropertyKey: Any]()
-                        cookieProperties[HTTPCookiePropertyKey.name] = cookie.name
-                        cookieProperties[HTTPCookiePropertyKey.value] = cookie.value
-                        cookieProperties[HTTPCookiePropertyKey.domain] = cookie.domain
-                        cookieProperties[HTTPCookiePropertyKey.path] = cookie.path
-                        cookieProperties[HTTPCookiePropertyKey.version] = cookie.version
-                        cookieProperties[HTTPCookiePropertyKey.expires] = cookie.expiresDate
-                        
-                        let newCookie = HTTPCookie(properties: cookieProperties)
-                        self.cookies.append(newCookie!)
-                    }
-                }
-                
-                if self.cookies.isEmpty || error != nil {
-                    print("HTTP connection failure: " + error.debugDescription)
-                }
-
-                semaphore.signal()
-            }
-
-            let task = session.dataTask(with: request!, completionHandler: connectionHandler)
-            task.resume()
-            _ = semaphore.wait(timeout: DispatchTime.distantFuture)
-
-            var i : Int = -1
-            if (task.response as? HTTPURLResponse) != nil {
-                i = (task.response as! HTTPURLResponse).statusCode
-            }
-            lastResponseCode = i
-            
-            if  i == -1 {
+*/
+        if !isValid() {
+            cookies.removeAll()
+        
+            let uri: String = self.options.getAppURI()
+            var request: URLRequest? = self.setAuth(uri: uri)
+            if request == nil {
                 throw OslcError.invalidRequest
             }
+            else {
+                if !self.options.isFormAuth() {
+                    self.setMethod(request: &request!, method: "GET", properties: nil)
+                }
 
-            if i < 400 {
-                self.valid = true
+                let configuration = URLSessionConfiguration()
+                var session : URLSession
+                if proxyConfiguration != nil {
+                    configuration.connectionProxyDictionary = proxyConfiguration
+                    session = URLSession(configuration: configuration)
+                } else {
+                    session = URLSession.shared
+                }
+
+                let semaphore = DispatchSemaphore(value: 0)
+                var errorString : String?
+                var responseCode : Int? = 0
+                self.valid = false
+                let task = session.dataTask(with: request!, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) in
+                    if (error != nil) {
+                        responseCode = 0
+                        errorString = "HTTP connection failure: " + (error?.localizedDescription)!
+                        print(errorString)
+                    }
+                    if let httpResponse = response as? HTTPURLResponse {
+                        responseCode = httpResponse.statusCode
+                        if (200...299).contains(httpResponse.statusCode), let fields = httpResponse.allHeaderFields as? [String : String] {
+                            self.valid = true
+                            /*
+                            if let data = data, let str = String(data: data, encoding: .utf8) {
+                                print ("HTTP Data: \(str)")
+                            }
+                            */
+                            let cookies = HTTPCookie.cookies(withResponseHeaderFields: fields, for: response!.url!)
+                            HTTPCookieStorage.shared.setCookies(cookies, for: response!.url!, mainDocumentURL: nil)
+                            for cookie in cookies {
+                                var cookieProperties = [HTTPCookiePropertyKey: Any]()
+                                cookieProperties[HTTPCookiePropertyKey.name] = cookie.name
+                                cookieProperties[HTTPCookiePropertyKey.value] = cookie.value
+                                cookieProperties[HTTPCookiePropertyKey.domain] = cookie.domain
+                                cookieProperties[HTTPCookiePropertyKey.path] = cookie.path
+                                cookieProperties[HTTPCookiePropertyKey.version] = cookie.version
+                                cookieProperties[HTTPCookiePropertyKey.expires] = cookie.expiresDate
+                                
+                                let newCookie = HTTPCookie(properties: cookieProperties)
+                                self.cookies.append(newCookie!)
+                            }
+                        }
+                        else {
+                            errorString = "Server Error"
+                        }
+                    }
+                    else {
+                        responseCode = 999
+                        errorString = "HTTP Response : Illegal Response: \(String(describing: response))"
+                    }
+                    semaphore.signal()
+                })
+                task.resume()
+                
+                _ = semaphore.wait(timeout: DispatchTime.distantFuture)
+                if  !self.valid {
+                    if responseCode == 0, errorString != nil {
+                        throw OslcError.loginFailure(message: errorString!)
+                    }
+                    else {
+                        throw OslcError.serverError(code: responseCode!, message: errorString!)
+                    }
+                }
             }
         }
     }
 
     func setAuth(uri: String) -> URLRequest? {
+        
         if self.options.getUser() != nil && self.options.getPassword() != nil {
             if options.isBasicAuth() {
                 let httpURL = URL(string: uri)
@@ -292,9 +311,7 @@ public class MaximoConnector {
             } else if options.isFormAuth() {
                 var appURI : String = uri
                 appURI += "/j_security_check";
-                
                 let httpURL = URL(string: uri)
-
                 var request = URLRequest(url : httpURL!)
 
                 request.httpMethod = "POST"
@@ -309,7 +326,6 @@ public class MaximoConnector {
                 postContent.append("&j_password=")
                 postContent.append(self.options.getPassword()!)
                 request.httpBody = postContent.data(using: .utf8)
-
                 return request
             }
         }
@@ -482,7 +498,7 @@ public class MaximoConnector {
 
             if dataReceived != nil {
                 let dataAsString : String? = String(data: dataReceived!, encoding: String.Encoding.utf8)
-                print(dataAsString!)
+//                print(dataAsString!)
             }
             
             responseError = error
@@ -634,45 +650,55 @@ public class MaximoConnector {
         
         var dataReceived : Data?
         var responseError : Error?
+        var errorString : String?
+        var responseCode : Int? = 0
+        self.valid = false
+        var json : [String: Any] = [:]
         let task = URLSession.shared.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) in
-            dataReceived = data
-            
-            if dataReceived != nil {
-                let dataAsString : String? = String(data: dataReceived!, encoding: String.Encoding.utf8)
-                print(dataAsString!)
+            if error != nil {
+                responseError = error
+                responseCode = 0
+                errorString = "HTTP connection failure: " + (error?.localizedDescription)!
+                print(errorString as Any)
+                json["error"] = errorString
+
             }
-            
-            responseError = error
+            else if let httpResponse = response as? HTTPURLResponse {
+                responseCode = httpResponse.statusCode
+                    if (200...299).contains(httpResponse.statusCode) {
+                        let href : String = httpResponse.allHeaderFields["Location"] as! String
+                        if self.options.isLean() {
+                            json["rdf:resource"] = href
+                        } else {
+                            json["href"] = href
+                        }
+                    }
+                    else  {
+                        if let dataReceived = data {
+                            json = try! JSONSerialization.jsonObject(with: dataReceived, options: []) as! [String : Any]
+                            let dataAsString : String? = String(data: dataReceived, encoding: String.Encoding.utf8)
+                            errorString = dataAsString
+                        }
+                    }
+                }
+            else {
+                responseCode = 999
+                errorString = "HTTP Response : Illegal Response: \(String(describing: response))"
+                json["error"] = errorString
+            }
             semaphore.signal()
         })
         task.resume()
         _ = semaphore.wait(timeout: DispatchTime.distantFuture)
-        
-        var resCode : Int = -1
-        if (task.response as? HTTPURLResponse) != nil {
-            resCode = (task.response as! HTTPURLResponse).statusCode
-        }
-        lastResponseCode = resCode;
-        if (resCode >= 400) {
+        if (responseCode! >= 400) {
             if responseError != nil {
                 throw responseError!
             }
-        }
-
-        var json : [String: Any] = [:]
-        if properties != nil && properties!.count == 0 {
-            let href : String = (task.response as! HTTPURLResponse).allHeaderFields["Location"] as! String
-            if self.options.isLean() {
-                json["rdf:resource"] = href
-            } else {
-                json["href"] = href
-            }
-        } else {
-            if dataReceived != nil && !dataReceived!.isEmpty {
-                json = try! JSONSerialization.jsonObject(with: dataReceived!, options: []) as! [String : Any]
+            else {
+                throw OslcError.serverError(code: responseCode!, message: errorString!)
             }
         }
-
+        
         return json
     }
 
@@ -886,42 +912,47 @@ public class MaximoConnector {
             self.setHeaders(request: &request, headers: headers!)
         }
         
-        var dataReceived : Data?
         var responseError : Error?
+        var responseCode : Int = -1
+        var errorString : String?
+        var json : [String: Any] = [:]
         let task = URLSession.shared.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) in
-            dataReceived = data
-            
-            if dataReceived != nil {
-                let dataAsString : String? = String(data: dataReceived!, encoding: String.Encoding.utf8)
-                print(dataAsString!)
+            if error != nil {
+                responseError = error
+                responseCode = 0
+                errorString = "HTTP connection failure: " + (error?.localizedDescription)!
+                print(errorString as Any)
             }
-            
-            responseError = error
+            else if let httpResponse = response as? HTTPURLResponse {
+                responseCode = httpResponse.statusCode
+                if let dataReceived = data {
+                    // Error from the calls are sent in the body of the response
+                    if  httpResponse.statusCode >= 400 {
+                        let json = try! JSONSerialization.jsonObject(with: dataReceived, options: []) as! [String : Any]
+                        let error = json["Error"] as! [String : Any]
+                        errorString = error["message"] as? String
+                    }
+                    else if httpResponse.statusCode != 204 {
+                        json = try! JSONSerialization.jsonObject(with: dataReceived, options: []) as! [String : Any]
+                    }
+                }
+            }
+            else {
+                responseCode = 999
+                errorString = "HTTP Response : Illegal Response: \(String(describing: response))"
+            }
             semaphore.signal()
         })
         task.resume()
         _ = semaphore.wait(timeout: DispatchTime.distantFuture)
-        
-        var resCode : Int = -1
-        if (task.response as? HTTPURLResponse) != nil {
-            resCode = (task.response as! HTTPURLResponse).statusCode
-        }
-        lastResponseCode = resCode;
-        if (resCode >= 400) {
+        if (responseCode >= 400) || (responseCode == 0){
             if responseError != nil {
                 throw responseError!
             }
+            else {
+                throw OslcError.serverError(code: responseCode, message: errorString!)
+            }
         }
-
-        var json : [String: Any] = [:]
-        if (resCode == 204) {
-            return json
-        }
-
-        if dataReceived != nil {
-            json = try! JSONSerialization.jsonObject(with: dataReceived!, options: []) as! [String : Any]
-        }
-
         return json
     }
     
@@ -1195,7 +1226,6 @@ public class MaximoConnector {
             requestURI = uri.replacingOccurrences(of: currentHost, with: publicHost)
         }
         
-        let semaphore = DispatchSemaphore(value: 0)
         let httpURL = URL(string: requestURI)
         if cookies.isEmpty {
             try self.connect()
@@ -1207,31 +1237,43 @@ public class MaximoConnector {
         if headers != nil && !(headers!.isEmpty) {
             self.setHeaders(request: &request, headers: headers!)
         }
-        
-        var dataReceived : Data?
+        let semaphore = DispatchSemaphore(value: 0)
         var responseError : Error?
-        let task = URLSession.shared.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) in
-            dataReceived = data
-            
-            if dataReceived != nil {
-                let dataAsString : String? = String(data: dataReceived!, encoding: String.Encoding.utf8)
-                print(dataAsString!)
+        var responseCode : Int = -1
+        var errorString : String?
+        let task = URLSession.shared.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) -> Void in
+            if error != nil {
+                responseError = error
+                responseCode = 0
+                errorString = "HTTP connection failure: " + (error?.localizedDescription)!
+                print(errorString as Any)
+            }
+            else if let httpResponse = response as? HTTPURLResponse {
+                responseCode = httpResponse.statusCode
+                if  httpResponse.statusCode >= 400 {
+                    if let dataReceived = data {
+                        let json = try! JSONSerialization.jsonObject(with: dataReceived, options: []) as! [String : Any]
+                        let error = json["Error"] as! [String : Any]
+                        errorString = error["message"] as? String
+                    }
+                }
+            }
+            else {
+                responseCode = 999
+                errorString = "HTTP Response : Illegal Response: \(String(describing: response))"
             }
             
             responseError = error
             semaphore.signal()
-        })
+        } )
         task.resume()
         _ = semaphore.wait(timeout: DispatchTime.distantFuture)
-
-        var resCode : Int = -1
-        if (task.response as? HTTPURLResponse) != nil {
-            resCode = (task.response as! HTTPURLResponse).statusCode
-        }
-        lastResponseCode = resCode;
-        if (resCode >= 400) {
+        if (responseCode >= 400) || (responseCode == 0){
             if responseError != nil {
                 throw responseError!
+            }
+            else {
+                throw OslcError.serverError(code: responseCode, message: errorString!)
             }
         }
     }
