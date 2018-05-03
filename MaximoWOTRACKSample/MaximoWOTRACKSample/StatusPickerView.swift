@@ -33,17 +33,13 @@ class StatusPickerView : UIPickerView, UIPickerViewDataSource, UIPickerViewDeleg
             index += 1
         }
 
-        DispatchQueue.global().async {
-            DispatchQueue.main.async {
-                if pickerData.count > 0 {
-                    self.pickerTextField.text = selectedItem
-                    self.selectRow(self.selectedRow, inComponent: 0, animated: true)
-                    self.pickerTextField.isEnabled = true
-                } else {
-                    self.pickerTextField.text = nil
-                    self.pickerTextField.isEnabled = false
-                }
-            }
+        if pickerData.count > 0 {
+            self.pickerTextField.text = selectedItem
+            self.selectRow(self.selectedRow, inComponent: 0, animated: true)
+            self.pickerTextField.isEnabled = true
+        } else {
+            self.pickerTextField.text = nil
+            self.pickerTextField.isEnabled = false
         }
     }
     
