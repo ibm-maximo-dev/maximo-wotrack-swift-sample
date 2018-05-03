@@ -61,9 +61,11 @@ public class MaximoAPI {
 
         let count = try workOrderSet!.count()
         var workOrders : [[String: Any]] = []
-        for index in 0...count-1 {
-            let resource = try workOrderSet!.member(index: index)
-            workOrders.append(try resource!.toJSON())
+        if (count > 0) {
+            for index in 0...count-1 {
+                let resource = try workOrderSet!.member(index: index)
+                workOrders.append(try resource!.toJSON())
+            }
         }
 
         return workOrders
@@ -93,9 +95,14 @@ public class MaximoAPI {
         return workOrders
     }
 
-    public func updatetWorkOrder(workOrder: [String: Any]) throws {
+    public func updateWorkOrder(workOrder: [String: Any]) throws {
         let uri = connector!.getCurrentURI() + "/os/mxwo/" + String(workOrder["workorderid"] as! Int)
         _ = try connector!.update(uri: uri, jo: workOrder, properties: nil)
+    }
+
+    public func deleteWorkOrder(workOrder: [String: Any]) throws {
+        let uri = connector!.getCurrentURI() + "/os/mxwo/" + String(workOrder["workorderid"] as! Int)
+        _ = try connector!.delete(uri: uri)
     }
 
     public func createWorkOrder(workOrder: [String: Any]) throws {
@@ -108,16 +115,17 @@ public class MaximoAPI {
         var resultList : [[String: Any]] = []
         _ = statusSet!._where(whereClause: "spi:domainid=\"WOSTATUS\"")
         _ = try statusSet!.fetch()
-        let woStatusDomain = try statusSet!.member(index: 0)
-        var woStatusJSON = try woStatusDomain!.toJSON()
-        var values : [Any] = woStatusJSON["synonymdomain"] as! [Any]
-        var i = 0
-        while (i < values.count) {
-            let domainValue : [String: Any] = values[i] as! [String : Any]
-            if (domainValue["defaults"] as! Int) == 1 {
-                resultList.append(domainValue)
+        if let woStatusDomain = try statusSet!.member(index: 0) {
+            var woStatusJSON = try woStatusDomain.toJSON()
+            var values : [Any] = woStatusJSON["synonymdomain"] as! [Any]
+            var i = 0
+            while (i < values.count) {
+                let domainValue : [String: Any] = values[i] as! [String : Any]
+                if (domainValue["defaults"] as! Int) == 1 {
+                    resultList.append(domainValue)
+                }
+                i += 1
             }
-            i += 1
         }
         return resultList
     }
