@@ -176,8 +176,11 @@ public class ResourceSet {
      * @throws
      */
     public func toJSONBytes() throws -> Data {
-        let data = try JSONEncoder().encode(self.jsonObject)
+/*        let data = try JSONEncoder().encode(self.jsonObject)
         return data
+*/
+        let data = try? JSONSerialization.data(withJSONObject: self.jsonObject, options: [])
+        return data!
     }
 
     // Set whereClause
@@ -554,8 +557,8 @@ public class ResourceSet {
         if !isLoaded {
             _ = try load()
         }
-        if index >= (self.jsonArray?.count)! {
-            return nil;
+        if let size = self.jsonArray?.count, index > size {
+            return nil
         }
         let jo : [String: Any] = self.jsonArray![index] as! [String : Any]
         return Resource(jo: jo, mc: self.mc!);
