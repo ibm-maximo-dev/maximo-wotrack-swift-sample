@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		148FC9C3CA746DE1BA55C86C /* Pods_MaximoWOTRACKSampleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DFD702275CCB6486D6A0CDB /* Pods_MaximoWOTRACKSampleTests.framework */; };
-		32367E28DAA71147F5612E30 /* Pods_MaximoWOTRACKSampleUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0B60F1880ED1524577E3BD7 /* Pods_MaximoWOTRACKSampleUITests.framework */; };
+		2FAF6C741B1E51F9C26CCF8B /* Pods_MaximoWOTRACKSample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2DBA0C21D64E82EFD8899CB /* Pods_MaximoWOTRACKSample.framework */; };
+		5AD6BFC63AFCB488175FC3A6 /* Pods_MaximoWOTRACKSampleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70003F6FA0574247E6FEC296 /* Pods_MaximoWOTRACKSampleTests.framework */; };
 		9A31F5D6202DE88E0020D697 /* StatusPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A31F5D5202DE88E0020D697 /* StatusPickerView.swift */; };
 		9A9D324E202B572D005A7F64 /* FormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9D324D202B572D005A7F64 /* FormViewController.swift */; };
 		9AC280D9202CFE0B00140792 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC280D8202CFE0B00140792 /* TableViewCell.swift */; };
@@ -23,7 +23,7 @@
 		9AD179502024C40B00A9AD74 /* MaximoRESTSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AD179512024C40C00A9AD74 /* MaximoRESTSDK.framework */; };
 		9AD1795C2024DA9B00A9AD74 /* MaximoAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD1795B2024DA9B00A9AD74 /* MaximoAPI.swift */; };
 		9AD179632025027500A9AD74 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD179622025027500A9AD74 /* MainViewController.swift */; };
-		9F4C3E1ADCF067213F9751FC /* Pods_MaximoWOTRACKSample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 590F6ACE6AFF328D938E8AAF /* Pods_MaximoWOTRACKSample.framework */; };
+		D9CBF2594EEF398788C53437 /* Pods_MaximoWOTRACKSampleUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29CBDEA72E46DA3A0356368C /* Pods_MaximoWOTRACKSampleUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,11 +44,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		353414B98CA6788B97C8998A /* Pods-MaximoWOTRACKSample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaximoWOTRACKSample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MaximoWOTRACKSample/Pods-MaximoWOTRACKSample.debug.xcconfig"; sourceTree = "<group>"; };
-		3DFD702275CCB6486D6A0CDB /* Pods_MaximoWOTRACKSampleTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MaximoWOTRACKSampleTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		590F6ACE6AFF328D938E8AAF /* Pods_MaximoWOTRACKSample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MaximoWOTRACKSample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		71F1E794C328A395CFDC1256 /* Pods-MaximoWOTRACKSampleUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaximoWOTRACKSampleUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MaximoWOTRACKSampleUITests/Pods-MaximoWOTRACKSampleUITests.release.xcconfig"; sourceTree = "<group>"; };
-		9104349C86A81A21E1F72B9F /* Pods-MaximoWOTRACKSampleUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaximoWOTRACKSampleUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MaximoWOTRACKSampleUITests/Pods-MaximoWOTRACKSampleUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		1407AC19C7D561BE165E55DE /* Pods-MaximoWOTRACKSampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaximoWOTRACKSampleTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MaximoWOTRACKSampleTests/Pods-MaximoWOTRACKSampleTests.release.xcconfig"; sourceTree = "<group>"; };
+		231AE6D1390F953E3515EF98 /* Pods-MaximoWOTRACKSample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaximoWOTRACKSample.release.xcconfig"; path = "Pods/Target Support Files/Pods-MaximoWOTRACKSample/Pods-MaximoWOTRACKSample.release.xcconfig"; sourceTree = "<group>"; };
+		29CBDEA72E46DA3A0356368C /* Pods_MaximoWOTRACKSampleUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MaximoWOTRACKSampleUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		70003F6FA0574247E6FEC296 /* Pods_MaximoWOTRACKSampleTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MaximoWOTRACKSampleTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8438785A2CB535C78C2C0476 /* Pods-MaximoWOTRACKSample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaximoWOTRACKSample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MaximoWOTRACKSample/Pods-MaximoWOTRACKSample.debug.xcconfig"; sourceTree = "<group>"; };
+		8D31EE69A8F3C69EB3FAA886 /* Pods-MaximoWOTRACKSampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaximoWOTRACKSampleTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MaximoWOTRACKSampleTests/Pods-MaximoWOTRACKSampleTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9A31F5D5202DE88E0020D697 /* StatusPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusPickerView.swift; sourceTree = "<group>"; };
 		9A9D324D202B572D005A7F64 /* FormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewController.swift; sourceTree = "<group>"; };
 		9AC280D8202CFE0B00140792 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
@@ -70,10 +71,9 @@
 		9AD179522024C4A200A9AD74 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		9AD1795B2024DA9B00A9AD74 /* MaximoAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaximoAPI.swift; sourceTree = "<group>"; };
 		9AD179622025027500A9AD74 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		9E9E81F5633A7E705540232F /* Pods-MaximoWOTRACKSampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaximoWOTRACKSampleTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MaximoWOTRACKSampleTests/Pods-MaximoWOTRACKSampleTests.release.xcconfig"; sourceTree = "<group>"; };
-		CD491D7544D6A1EC03CA15F7 /* Pods-MaximoWOTRACKSample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaximoWOTRACKSample.release.xcconfig"; path = "Pods/Target Support Files/Pods-MaximoWOTRACKSample/Pods-MaximoWOTRACKSample.release.xcconfig"; sourceTree = "<group>"; };
-		D0B60F1880ED1524577E3BD7 /* Pods_MaximoWOTRACKSampleUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MaximoWOTRACKSampleUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		EE6E4D2E1654184E5AA6A397 /* Pods-MaximoWOTRACKSampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaximoWOTRACKSampleTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MaximoWOTRACKSampleTests/Pods-MaximoWOTRACKSampleTests.debug.xcconfig"; sourceTree = "<group>"; };
+		D2DBA0C21D64E82EFD8899CB /* Pods_MaximoWOTRACKSample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MaximoWOTRACKSample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DBA87A170384464350152ED9 /* Pods-MaximoWOTRACKSampleUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaximoWOTRACKSampleUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MaximoWOTRACKSampleUITests/Pods-MaximoWOTRACKSampleUITests.release.xcconfig"; sourceTree = "<group>"; };
+		FA6443B38F6234C40F4D9A97 /* Pods-MaximoWOTRACKSampleUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaximoWOTRACKSampleUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MaximoWOTRACKSampleUITests/Pods-MaximoWOTRACKSampleUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,7 +82,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9AD179502024C40B00A9AD74 /* MaximoRESTSDK.framework in Frameworks */,
-				9F4C3E1ADCF067213F9751FC /* Pods_MaximoWOTRACKSample.framework in Frameworks */,
+				2FAF6C741B1E51F9C26CCF8B /* Pods_MaximoWOTRACKSample.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,7 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				148FC9C3CA746DE1BA55C86C /* Pods_MaximoWOTRACKSampleTests.framework in Frameworks */,
+				5AD6BFC63AFCB488175FC3A6 /* Pods_MaximoWOTRACKSampleTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,7 +98,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				32367E28DAA71147F5612E30 /* Pods_MaximoWOTRACKSampleUITests.framework in Frameworks */,
+				D9CBF2594EEF398788C53437 /* Pods_MaximoWOTRACKSampleUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,22 +110,22 @@
 			children = (
 				9AD179522024C4A200A9AD74 /* XCTest.framework */,
 				9AD179512024C40C00A9AD74 /* MaximoRESTSDK.framework */,
-				590F6ACE6AFF328D938E8AAF /* Pods_MaximoWOTRACKSample.framework */,
-				3DFD702275CCB6486D6A0CDB /* Pods_MaximoWOTRACKSampleTests.framework */,
-				D0B60F1880ED1524577E3BD7 /* Pods_MaximoWOTRACKSampleUITests.framework */,
+				D2DBA0C21D64E82EFD8899CB /* Pods_MaximoWOTRACKSample.framework */,
+				70003F6FA0574247E6FEC296 /* Pods_MaximoWOTRACKSampleTests.framework */,
+				29CBDEA72E46DA3A0356368C /* Pods_MaximoWOTRACKSampleUITests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		536D4F7D83E73EFFEAC123F0 /* Pods */ = {
+		743E552311C476EC91D145A1 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				353414B98CA6788B97C8998A /* Pods-MaximoWOTRACKSample.debug.xcconfig */,
-				CD491D7544D6A1EC03CA15F7 /* Pods-MaximoWOTRACKSample.release.xcconfig */,
-				EE6E4D2E1654184E5AA6A397 /* Pods-MaximoWOTRACKSampleTests.debug.xcconfig */,
-				9E9E81F5633A7E705540232F /* Pods-MaximoWOTRACKSampleTests.release.xcconfig */,
-				9104349C86A81A21E1F72B9F /* Pods-MaximoWOTRACKSampleUITests.debug.xcconfig */,
-				71F1E794C328A395CFDC1256 /* Pods-MaximoWOTRACKSampleUITests.release.xcconfig */,
+				8438785A2CB535C78C2C0476 /* Pods-MaximoWOTRACKSample.debug.xcconfig */,
+				231AE6D1390F953E3515EF98 /* Pods-MaximoWOTRACKSample.release.xcconfig */,
+				8D31EE69A8F3C69EB3FAA886 /* Pods-MaximoWOTRACKSampleTests.debug.xcconfig */,
+				1407AC19C7D561BE165E55DE /* Pods-MaximoWOTRACKSampleTests.release.xcconfig */,
+				FA6443B38F6234C40F4D9A97 /* Pods-MaximoWOTRACKSampleUITests.debug.xcconfig */,
+				DBA87A170384464350152ED9 /* Pods-MaximoWOTRACKSampleUITests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -137,8 +137,8 @@
 				9AD179362024B9F200A9AD74 /* MaximoWOTRACKSampleTests */,
 				9AD179412024B9F200A9AD74 /* MaximoWOTRACKSampleUITests */,
 				9AD179202024B9F100A9AD74 /* Products */,
-				536D4F7D83E73EFFEAC123F0 /* Pods */,
 				440DB7CFC153B6236F509A70 /* Frameworks */,
+				743E552311C476EC91D145A1 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -196,12 +196,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9AD179472024B9F200A9AD74 /* Build configuration list for PBXNativeTarget "MaximoWOTRACKSample" */;
 			buildPhases = (
-				C8BBAF36F98BE35F03DD726D /* [CP] Check Pods Manifest.lock */,
+				3AA3BAEBF9EB43332A0EB5B3 /* [CP] Check Pods Manifest.lock */,
 				9AD1791B2024B9F100A9AD74 /* Sources */,
 				9AD1791C2024B9F100A9AD74 /* Frameworks */,
 				9AD1791D2024B9F100A9AD74 /* Resources */,
-				372D501619733831B387B3E3 /* [CP] Embed Pods Frameworks */,
-				937DD4C5CA0F23DADDA71112 /* [CP] Copy Pods Resources */,
+				3243EE8F51E4EEDF3F45548E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -216,12 +215,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9AD1794A2024B9F200A9AD74 /* Build configuration list for PBXNativeTarget "MaximoWOTRACKSampleTests" */;
 			buildPhases = (
-				D281B00C9490F72F1EDD79EA /* [CP] Check Pods Manifest.lock */,
+				412A01BD049447C52D968693 /* [CP] Check Pods Manifest.lock */,
 				9AD1792F2024B9F200A9AD74 /* Sources */,
 				9AD179302024B9F200A9AD74 /* Frameworks */,
 				9AD179312024B9F200A9AD74 /* Resources */,
-				014697E34ED597B8B9E22786 /* [CP] Embed Pods Frameworks */,
-				51CD709DC1BA8BF44A86D7C5 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -237,12 +234,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9AD1794D2024B9F200A9AD74 /* Build configuration list for PBXNativeTarget "MaximoWOTRACKSampleUITests" */;
 			buildPhases = (
-				E0DB03BBF2B4C89A9D5A025A /* [CP] Check Pods Manifest.lock */,
+				37D62864CB764D6FCDF9477E /* [CP] Check Pods Manifest.lock */,
 				9AD1793A2024B9F200A9AD74 /* Sources */,
 				9AD1793B2024B9F200A9AD74 /* Frameworks */,
 				9AD1793C2024B9F200A9AD74 /* Resources */,
-				1DFC312A9C507461B7518FE2 /* [CP] Embed Pods Frameworks */,
-				415529B8C39FE7A7038AECBD /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -328,43 +323,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		014697E34ED597B8B9E22786 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-MaximoWOTRACKSampleTests/Pods-MaximoWOTRACKSampleTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/OCMock/OCMock.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OCMock.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MaximoWOTRACKSampleTests/Pods-MaximoWOTRACKSampleTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		1DFC312A9C507461B7518FE2 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-MaximoWOTRACKSampleUITests/Pods-MaximoWOTRACKSampleUITests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/OCMock/OCMock.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OCMock.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MaximoWOTRACKSampleUITests/Pods-MaximoWOTRACKSampleUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		372D501619733831B387B3E3 /* [CP] Embed Pods Frameworks */ = {
+		3243EE8F51E4EEDF3F45548E /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -382,52 +341,25 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MaximoWOTRACKSample/Pods-MaximoWOTRACKSample-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		415529B8C39FE7A7038AECBD /* [CP] Copy Pods Resources */ = {
+		37D62864CB764D6FCDF9477E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
-			name = "[CP] Copy Pods Resources";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MaximoWOTRACKSampleUITests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MaximoWOTRACKSampleUITests/Pods-MaximoWOTRACKSampleUITests-resources.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		51CD709DC1BA8BF44A86D7C5 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MaximoWOTRACKSampleTests/Pods-MaximoWOTRACKSampleTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		937DD4C5CA0F23DADDA71112 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MaximoWOTRACKSample/Pods-MaximoWOTRACKSample-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C8BBAF36F98BE35F03DD726D /* [CP] Check Pods Manifest.lock */ = {
+		3AA3BAEBF9EB43332A0EB5B3 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -445,7 +377,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D281B00C9490F72F1EDD79EA /* [CP] Check Pods Manifest.lock */ = {
+		412A01BD049447C52D968693 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -457,24 +389,6 @@
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-MaximoWOTRACKSampleTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E0DB03BBF2B4C89A9D5A025A /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-MaximoWOTRACKSampleUITests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -659,7 +573,7 @@
 		};
 		9AD179482024B9F200A9AD74 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 353414B98CA6788B97C8998A /* Pods-MaximoWOTRACKSample.debug.xcconfig */;
+			baseConfigurationReference = 8438785A2CB535C78C2C0476 /* Pods-MaximoWOTRACKSample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -675,7 +589,7 @@
 		};
 		9AD179492024B9F200A9AD74 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CD491D7544D6A1EC03CA15F7 /* Pods-MaximoWOTRACKSample.release.xcconfig */;
+			baseConfigurationReference = 231AE6D1390F953E3515EF98 /* Pods-MaximoWOTRACKSample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -691,7 +605,7 @@
 		};
 		9AD1794B2024B9F200A9AD74 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EE6E4D2E1654184E5AA6A397 /* Pods-MaximoWOTRACKSampleTests.debug.xcconfig */;
+			baseConfigurationReference = 8D31EE69A8F3C69EB3FAA886 /* Pods-MaximoWOTRACKSampleTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -708,7 +622,7 @@
 		};
 		9AD1794C2024B9F200A9AD74 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9E9E81F5633A7E705540232F /* Pods-MaximoWOTRACKSampleTests.release.xcconfig */;
+			baseConfigurationReference = 1407AC19C7D561BE165E55DE /* Pods-MaximoWOTRACKSampleTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -725,7 +639,7 @@
 		};
 		9AD1794E2024B9F200A9AD74 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9104349C86A81A21E1F72B9F /* Pods-MaximoWOTRACKSampleUITests.debug.xcconfig */;
+			baseConfigurationReference = FA6443B38F6234C40F4D9A97 /* Pods-MaximoWOTRACKSampleUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -741,7 +655,7 @@
 		};
 		9AD1794F2024B9F200A9AD74 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 71F1E794C328A395CFDC1256 /* Pods-MaximoWOTRACKSampleUITests.release.xcconfig */;
+			baseConfigurationReference = DBA87A170384464350152ED9 /* Pods-MaximoWOTRACKSampleUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
