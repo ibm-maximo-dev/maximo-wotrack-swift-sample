@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MaximoRESTSDK
 
 extension UITextField {
     func loadDropdownData(data: [String], selectedItem: String) {
@@ -24,6 +25,7 @@ class FormViewController: UIViewController {
     @IBOutlet weak var _saveButton: UIButton!
     @IBOutlet weak var _status: UITextField!
     
+    @IBOutlet weak var deleteButton: RoundedButton!
     var selectedWorkOrder : [String: Any]?
     var selectedDateField : String?
     var scheduleStart : Date?
@@ -35,25 +37,9 @@ class FormViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-
         _scheduleStart.addTarget(self, action: #selector(showDateTimePicker), for: UIControlEvents.touchDown)
         _scheduleFinish.addTarget(self, action: #selector(showDateTimePicker), for: UIControlEvents.touchDown)
         _saveButton.addTarget(self, action: #selector(saveWorkOrder), for: UIControlEvents.touchUpInside)
-        
-        do {
-            statusList = try MaximoAPI.shared().listWorkOrderStatuses()
-        }
-        catch {
-            //TODO: Show error message.
-        }
-
-        var stringList : [String] = []
-        var i = 0
-        while (i < statusList.count) {
-            var domainValue = statusList[i]
-            stringList.append(domainValue["description"] as! String)
-            i += 1
-        }
 
         var statusDescription = "Waiting on Approval"
         if selectedWorkOrder != nil {
@@ -63,9 +49,7 @@ class FormViewController: UIViewController {
             _duration.text = String(selectedWorkOrder!["estdur"] as! Double)
             statusDescription = self.selectedWorkOrder!["status_description"] as! String
             
-//            let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-            
             if (selectedWorkOrder!["schedstart"] != nil) {
                 scheduleStart = dateFormatter.date(from: selectedWorkOrder!["schedstart"] as! String)
                 dateFormatter.dateFormat = "MM/dd/yyyy HH:mm"
@@ -78,13 +62,26 @@ class FormViewController: UIViewController {
                 dateFormatter.dateFormat = "MM/dd/yyyy HH:mm"
                 _scheduleFinish.text = dateFormatter.string(from: scheduleFinish!)
             }
+            _status.isUserInteractionEnabled = true
+        }
+        
+        do {
+            statusList = try MaximoAPI.shared().listWorkOrderStatuses()
+            var stringList : [String] = []
+            var i = 0
+            while (i < statusList.count) {
+                var domainValue = statusList[i]
+                stringList.append(domainValue["description"] as! String)
+                i += 1
+            }
+            
+            _status.loadDropdownData(data: stringList, selectedItem: statusDescription)
+        }
+        catch {
+            //TODO: Show error message.
         }
 
-        _status.loadDropdownData(data: stringList, selectedItem: statusDescription)
-
-        if isNew {
-            _status.isUserInteractionEnabled = false
-        }
+        
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -120,7 +117,6 @@ class FormViewController: UIViewController {
         let selectedStatus = statusList[statusPicker.selectedRow]
         selectedWorkOrder!["status"] = selectedStatus["maxvalue"]
         selectedWorkOrder!["status_description"] = selectedStatus["description"]
-
         return selectedWorkOrder!
     }
     
@@ -164,7 +160,10 @@ class FormViewController: UIViewController {
         }
         // Set duration field
         figureOutDuration()
-
+        guard sender.isHidden == false else {
+            return
+        }
+        sender.isHidden = true
     }
 
     @objc func saveWorkOrder() {
@@ -174,17 +173,41 @@ class FormViewController: UIViewController {
                 try MaximoAPI.shared().createWorkOrder(workOrder: workOrder)
             }
             else {
-                try MaximoAPI.shared().updatetWorkOrder(workOrder: workOrder)
+                try MaximoAPI.shared().updateWorkOrder(workOrder: workOrder)
             }
 
             let alert = UIAlertController(title: "Info", message: "Work Order successfully saved.", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }
-        catch {
-            let alert = UIAlertController(title: "Error", message: "An error occurred while saving the Work Order", preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
+        catch let e{
+            showAlertWithText(header: "Error", message: e.localizedDescription)
         }
+    }
+    
+    @IBAction func deleteButtonTouched(_ sender: RoundedButton) {
+        guard let workorder = selectedWorkOrder else {
+            showAlertWithText(header: "Error", message: "No Work Order present")
+            return
+        }
+        do {
+            try MaximoAPI.shared().deleteWorkOrder(workOrder: workorder)
+        }
+        catch OslcError.serverError(let code, let error) {
+            showAlertWithText(header: "Error", message: "\(code) : \(error)")
+        }
+        catch let e {
+            showAlertWithText(header: "Error", message: e.localizedDescription)
+            print(e)
+        }
+
+    }
+    
+    // Show alert
+    func showAlertWithText (header : String = "Warning", message : String) {
+        let alert = UIAlertController(title: header, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+        alert.view.tintColor = UIColor.red
+        self.present(alert, animated: true, completion: nil)
     }
 }
