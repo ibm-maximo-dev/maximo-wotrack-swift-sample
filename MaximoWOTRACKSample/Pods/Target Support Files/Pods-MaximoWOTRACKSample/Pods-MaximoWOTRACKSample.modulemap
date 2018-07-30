@@ -1,6 +1,0 @@
-framework module Pods_MaximoWOTRACKSample {
-  umbrella header "Pods-MaximoWOTRACKSample-umbrella.h"
-
-  export *
-  module * { export * }
-}

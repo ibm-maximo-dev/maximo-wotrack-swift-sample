@@ -10,6 +10,8 @@ MaximoWOTRACKSample/Pods
 
 ## Various settings
 MaximoWOTRACKSample/xcuserdata
+MaximoWOTRACKSample/MaximoWOTRACKSample.xcodeproj/xcuserdata/
+MaximoWOTRACKSample/MaximoWOTRACKSample.xcworkspace/xcuserdata
 
 ## Obj-C/Swift specific
 MaximoWOTRACKSample/*.hmap
@@ -17,3 +19,4 @@ MaximoWOTRACKSample/*.ipa
 
 # Swift Package Manager
 MaximoWOTRACKSample/build/
+MaximoWOTRACKSample/MaximoWOTRACKSample.xcodeproj/xcuserdata/
