@@ -1,12 +1,16 @@
 PODS:
-  - MaximoRESTSDK (1.0.0)
+  - MaximoRESTSDK (1.0.3)
 
 DEPENDENCIES:
-  - MaximoRESTSDK (= 1.0.0)
+  - MaximoRESTSDK (from `../../maximo-swift-restclient`)
+
+EXTERNAL SOURCES:
+  MaximoRESTSDK:
+    :path: "../../maximo-swift-restclient"
 
 SPEC CHECKSUMS:
-  MaximoRESTSDK: 9034059f5670c9768c57a70e8c20b7d81032d090
+  MaximoRESTSDK: 9235c065c7b42f8808e0d3bc9ff4a1ac8b621c81
 
-PODFILE CHECKSUM: 791f20190dee32d822848e5e1a3d3d44708e9ba7
+PODFILE CHECKSUM: e6df565b53551574912ba9bac419e1c65f404219
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.0

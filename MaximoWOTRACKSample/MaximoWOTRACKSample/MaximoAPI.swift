@@ -55,7 +55,7 @@ public class MaximoAPI {
         workOrderSet = connector!.resourceSet(osName: "mxwo")
         _ = workOrderSet!.pageSize(pageSize: 10)
         _ = workOrderSet!._where(whereClause:
-            "spi:istask=0 and spi:siteid=\"" + siteID + "\" and spi:orgid=\"" + orgID + "\"")
+            "spi:istask=0 and spi:status=\"WAPPR\"")
         _ = workOrderSet!.paging(type: true)
         _ = try workOrderSet!.fetch()
 

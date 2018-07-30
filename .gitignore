@@ -1,0 +1,19 @@
+## OS X Finder
+.DS_Store
+MaximoWOTRACKSample/.DS_Store
+
+## Build generated
+MaximoWOTRACKSample/DerivedData
+
+## Pod install folder
+MaximoWOTRACKSample/Pods
+
+## Various settings
+MaximoWOTRACKSample/xcuserdata
+
+## Obj-C/Swift specific
+MaximoWOTRACKSample/*.hmap
+MaximoWOTRACKSample/*.ipa
+
+# Swift Package Manager
+MaximoWOTRACKSample/build/
